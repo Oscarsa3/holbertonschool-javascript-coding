@@ -10,8 +10,8 @@ request(api, (error, response, body) => {
   const result = JSON.parse(body);
   let i = 0;
   let x = 0;
-  while (result['results'][i]) {
-    result['results'][i]['characters'].forEach((value) => {
+  while (result.results[i]) {
+    result.results[i].characters.forEach((value) => {
       if (value.endsWith('/18/')) {
         x++;
       }
