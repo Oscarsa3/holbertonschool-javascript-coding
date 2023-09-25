@@ -17,7 +17,7 @@ request(url, (error, response, body) => {
   }
   for (const k in results) {
     if (!results[k]){
-      delete result[k];
+      delete results[k];
     }
   }
   console.log(results);
