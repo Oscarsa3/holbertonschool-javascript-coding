@@ -19,7 +19,7 @@ request(url, (error, response, body) => {
     }
   }
   for (const k in results) {
-    if (!results[k]){
+    if (!results[k]) {
       delete results[k];
     }
   }
