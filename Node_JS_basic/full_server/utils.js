@@ -27,4 +27,4 @@ function readDatabase(path) {
   throw new Error('Cannot load the database');
 }
 
-module.exports = readDatabase;
+export default readDatabase;
