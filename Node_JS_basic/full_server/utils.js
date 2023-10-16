@@ -12,7 +12,7 @@ function readDatabase(path) {
         lines.forEach((line) => {
           getField[line[line.length - 1]] = getField[line[line.length - 1]] + 1 || 1;
         });
-        
+
         for (const field in getField) {
           if (field) {
             const names = lines.filter((line) => line[line.length - 1] === field)
@@ -21,11 +21,10 @@ function readDatabase(path) {
           }
         }
         resolve(nameOfStudents);
-      })
+      });
     });
-  } else {
-    throw new Error('Cannot load the database');
   }
+  throw new Error('Cannot load the database');
 }
 
 module.exports = readDatabase;
