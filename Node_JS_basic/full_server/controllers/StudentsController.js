@@ -11,7 +11,6 @@ class StudentsController {
       readDatabase(db)
         .then((data) => {
           log.push('This is the list of our students');
-
           for (const field in data) {
             if (field) {
               log.push(`Number of students in ${field}: ${data[field].length}. List: ${data[field].join(', ')}`);
