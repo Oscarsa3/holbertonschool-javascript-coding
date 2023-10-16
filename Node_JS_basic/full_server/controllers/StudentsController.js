@@ -47,11 +47,6 @@ class StudentsController {
             res.setHeader('Content-Type', 'text/plain');
             res.end(`List: ${data[major].join(', ')}`);
           }
-        })
-        .catch((err) => {
-          res.status(500);
-          res.setHeader('Content-Type', 'text/plain');
-          res.end(err.message);
         });
     } else {
       res.status(500);
