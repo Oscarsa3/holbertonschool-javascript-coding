@@ -43,7 +43,7 @@ class StudentsController {
           const { major } = req.params;
           res.status(200);
           res.setHeader('Content-Type', 'text/plain');
-          res.end(`List: ${data[major].join(', ')}`);
+          res.end(`List: ${data[major].sort().join(', ')}`);
         })
         .catch((err) => {
           res.status(500);
