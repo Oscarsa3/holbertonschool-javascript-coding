@@ -50,6 +50,7 @@ class StudentsController {
         })
         .catch((err) => {
           res.status(500);
+          res.setHeader('Content-Type', 'text/plain');
           res.end(err.message);
         });
     } else {
