@@ -10,11 +10,12 @@ class StudentsController {
     if (fs.existsSync(db)) {
       readDatabase(db)
         .then((data) => {
-          res.write('This is the list of our students\n');
+          res.write('This is the list of our students');
 
           for (const field in data) {
             if (field) {
-              res.write(`Number of students in ${field}: ${data[field].length}. List: ${data[field].join(', ')}\n`);
+              res.write('\n');
+              res.write(`Number of students in ${field}: ${data[field].length}. List: ${data[field].join(', ')}`);
             }
           }
           res.end();
