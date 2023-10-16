@@ -8,7 +8,7 @@ function countStudents(path) {
           console.log(error);
         } else {
           let lines = data.split('\n').map((line) => line.split(',').map((field) => field.trim().replace('\r', '')));
-          lines = lines.slice(1, lines.length);
+          lines = lines.slice(1, lines.length - 1);
           const getField = {};
           lines.forEach((line) => {
             getField[line[line.length - 1]] = getField[line[line.length - 1]] + 1 || 1;
