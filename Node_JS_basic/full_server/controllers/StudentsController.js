@@ -6,10 +6,11 @@ const db = process.argv[2];
 
 class StudentsController {
   static getAllStudents(req, res) {
-    res.status(200);
     if (fs.existsSync(db)) {
       readDatabase(db)
         .then((data) => {
+          res.status(200);
+          res.setHeader('Content-Type', 'text/plain');
           res.write('This is the list of our students');
 
           for (const field in data) {
@@ -21,30 +22,31 @@ class StudentsController {
           res.end();
         })
         .catch((err) => {
+          res.status(500);
+          res.setHeader('Content-Type', 'text/plain');
           res.end(err.message);
         });
     } else {
       res.status(500);
-      res.write('Cannot load the database');
+      res.setHeader('Content-Type', 'text/plain');
+      res.end('Cannot load the database');
     }
   }
 
   static getAllStudentsByMajor(req, res) {
-    res.status(200);
-
     if (fs.existsSync(db)) {
       readDatabase(db)
         .then((data) => {
           const { major } = req.params;
           if (data[major]) {
             res.status(200);
-            res.write(`List: ${data[major].join(', ')}`);
+            res.setHeader('Content-Type', 'text/plain');
+            res.end(`List: ${data[major].join(', ')}`);
           } else {
             res.status(500);
             res.setHeader('Content-Type', 'text/plain');
             res.end('Major parameter must be CS or SWE');
           }
-          res.end();
         })
         .catch((err) => {
           res.status(500);
