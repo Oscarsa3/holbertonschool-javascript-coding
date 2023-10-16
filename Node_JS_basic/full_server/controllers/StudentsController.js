@@ -56,7 +56,7 @@ class StudentsController {
     } else {
       res.status(500);
       res.setHeader('Content-Type', 'text/plain');
-      res.write('Cannot load the database');
+      res.end('Cannot load the database');
     }
   }
 }
