@@ -7,19 +7,19 @@ const db = process.argv[2];
 class StudentsController {
   static getAllStudents(req, res) {
     if (fs.existsSync(db)) {
+      const log = [];
       readDatabase(db)
         .then((data) => {
-          res.status(200);
-          res.setHeader('Content-Type', 'text/plain');
-          res.write('This is the list of our students');
+          log.push('This is the list of our students');
 
           for (const field in data) {
             if (field) {
-              res.write('\n');
-              res.write(`Number of students in ${field}: ${data[field].length}. List: ${data[field].join(', ')}`);
+              log.push(`Number of students in ${field}: ${data[field].length}. List: ${data[field].join(', ')}`);
             }
           }
-          res.end();
+          res.status(200);
+          res.setHeader('Content-Type', 'text/plain');
+          res.end(log.join('\n'));
         })
         .catch((err) => {
           res.status(500);
