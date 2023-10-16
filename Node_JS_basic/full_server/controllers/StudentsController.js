@@ -34,29 +34,31 @@ class StudentsController {
   }
 
   static getAllStudentsByMajor(req, res) {
-    if (fs.existsSync(db)) {
-      readDatabase(db)
-        .then((data) => {
-          const { major } = req.params;
-          if (data[major]) {
-            res.status(200);
-            res.setHeader('Content-Type', 'text/plain');
-            res.end(`List: ${data[major].join(', ')}`);
-          } else {
-            res.status(500);
-            res.setHeader('Content-Type', 'text/plain');
-            res.end('Major parameter must be CS or SWE');
-          }
-        })
-        .catch((err) => {
-          res.status(500);
-          res.setHeader('Content-Type', 'text/plain');
-          res.end(err.message);
-        });
-    } else {
+    if (req.params.major !== 'CS' && req.params.major !== 'SWE') {
       res.status(500);
       res.setHeader('Content-Type', 'text/plain');
-      res.end('Cannot load the database');
+      res.end('Major parameter must be CS or SWE');
+    }else {
+      if (fs.existsSync(db)) {
+        readDatabase(db)
+          .then((data) => {
+            const { major } = req.params;
+            if (data[major]) {
+              res.status(200);
+              res.setHeader('Content-Type', 'text/plain');
+              res.end(`List: ${data[major].join(', ')}`);
+            }
+          })
+          .catch((err) => {
+            res.status(500);
+            res.setHeader('Content-Type', 'text/plain');
+            res.end(err.message);
+          });
+      } else {
+        res.status(500);
+        res.setHeader('Content-Type', 'text/plain');
+        res.end('Cannot load the database');
+      }
     }
   }
 }
