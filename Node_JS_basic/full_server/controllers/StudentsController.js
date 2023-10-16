@@ -42,11 +42,14 @@ class StudentsController {
       readDatabase(db)
         .then((data) => {
           const { major } = req.params;
-          if (data[major]) {
-            res.status(200);
-            res.setHeader('Content-Type', 'text/plain');
-            res.end(`List: ${data[major].join(', ')}`);
-          }
+          res.status(200);
+          res.setHeader('Content-Type', 'text/plain');
+          res.end(`List: ${data[major].join(', ')}`);
+        })
+        .catch((err) => {
+          res.status(500);
+          res.setHeader('Content-Type', 'text/plain');
+          res.end(err.message);
         });
     } else {
       res.status(500);
